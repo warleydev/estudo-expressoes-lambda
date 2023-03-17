@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ExercicioFixacaoInterface.iml" filepath="$PROJECT_DIR$/ExercicioFixacaoInterface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/comparator.iml" filepath="$PROJECT_DIR$/comparator.iml" />
     </modules>
   </component>
 </project>

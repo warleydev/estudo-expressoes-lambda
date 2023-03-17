@@ -1,46 +1,29 @@
 package application;
 
-import entities.Contract;
-import entities.Installment;
-import model.services.ContractService;
-import model.services.PaypalService;
+import entities.Product;
+import model.ProductService;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
-import java.util.Scanner;
 
 public class Program {
     public static void main(String[] args) {
         Locale.setDefault(Locale.US);
-        Scanner sc = new Scanner(System.in);
+        List<Product> list = new ArrayList<>();
 
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        list.add(new Product("TV", 900.00));
+        list.add(new Product("Mouse", 50.00));
+        list.add(new Product("Tablet", 350.50));
+        list.add(new Product("HD Case", 80.90));
 
-        System.out.println("Entre os dados do contrato:");
-        System.out.print("Número: ");
-        int number = sc.nextInt();
 
-        System.out.print("Data (dd/MM/yyyy): ");
-        LocalDate date = LocalDate.parse(sc.next(), fmt);
+        list.forEach(System.out::println);
+        System.out.println("----------------------------------");
 
-        System.out.print("Valor do contrato: ");
-        double valueContract = sc.nextDouble();
+        ProductService ps = new ProductService();
+        double sumT = ps.filteredSum(list, p -> p.getName().toUpperCase().charAt(0) == 'T');
 
-        Contract contract = new Contract(number, date, valueContract);
-
-        System.out.print("Entre com o numero de parcelas: ");
-        int n = sc.nextInt();
-
-        ContractService contractService = new ContractService(new PaypalService());
-
-        contractService.processContract(contract, n);
-
-        System.out.println("PARCELAS: ");
-        for (Installment installment : contract.getInstallments()){
-            System.out.println(installment);
-        }
-
-        sc.close();
+        System.out.printf("A soma de todos os produtos que começam com a letra T é = R$%.2f", sumT);
     }
 }
